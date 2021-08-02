@@ -5,9 +5,9 @@ export default class FormComponent {
         this.validationFunctions = validationFunctions;
 
         /** @type {String} */
-        this.label = null;
+        this.labelElement = null;
         /** @type {HTMLElement.input} */
-        this.input = null;
+        this.inputElement = null;
         this.warningSpan = null;
 
         this.lastError = null;
@@ -23,16 +23,20 @@ export default class FormComponent {
             }
 
             this.label = dict.label;
-            this.input = dict.label;
+            this.inputElement = dict.inputElement;
             this.warningSpan = dict.warningSpan;
 
-            this.input.addEventListener("input", this.functionChain);
+            this.inputElement.addEventListener("input", this.delayedCall);
             
         }
     }
 
-    functionChain = (event) => {
-        const value = this.event.target.value;
+    delayedCall = (e) => {
+        setTimeout(this.functionChain(e), 500);
+    }
+
+    functionChain = (e) => {
+        const value = e.target.value;
         for(let i = 0; i < this.validationFunctions.length; i += 1 ){
             const curFunc = this.validationFunctions[i];
 
