@@ -86,11 +86,13 @@ export function validateIsInt(strValue){
  * 
  * @param {Number} value
  */
-
+//inclusive
 export function validateIsWithinRange(value, min, max){
-    if (typeof value !== "number"){
-        return "Input value must be a number!";
+    if (isNaN(value)){
+        return "Value must be a number!";
     }
+
+    value = parseInt(value);
 
     if (value < min){
         return `Input needs to be greater or equal to ${min}`;
@@ -102,9 +104,11 @@ export function validateIsWithinRange(value, min, max){
 
 
 export function validateIsWithinRangeFloat(value, min, max){
-    if (typeof value !== "number"){
-        return "Input value must be a number!";
+    if (isNaN(value)){
+        return "Value must be a number!";
     }
+
+    value = parseFloat(value);
 
     if (value < min){
         return `Input needs to be greater or equal to ${min}`;
